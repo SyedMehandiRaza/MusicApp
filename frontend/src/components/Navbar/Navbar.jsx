@@ -85,25 +85,25 @@ const Navbar = () => {
             <RxCrossCircled />
           </button>
         </div>
-        <div className="h-full flex flex-col items-center justify-center text-3xl">
+        <div className="h-full -mt-10 flex flex-col items-center justify-center text-3xl ">
           {navLinks.map((item, i) => (
             <Link
               key={i}
               to={item.path}
-              className="mb-12 hover:font-semibold hover:text-blue-500 transition-all duration-300"
+              className="mb-10 hover:font-semibold hover:text-blue-500 transition-all duration-300"
             >
               {item.name}
             </Link>
           ))}
           <Link
             to="/login"
-            className="mb-12 hover:font-semibold hover:text-blue-500 transition-all duration-300"
+            className="mb-10 hover:font-semibold hover:text-blue-500 transition-all duration-300"
           >
             Login
           </Link>
           <Link
             to="/signup"
-            className="mb-12 hover:font-semibold hover:text-blue-500 transition-all duration-300"
+            className="mb-10 hover:font-semibold hover:text-blue-500 transition-all duration-300"
           >
             Signup
           </Link>

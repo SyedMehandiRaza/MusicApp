@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoReorderThreeOutline } from "react-icons/io5";
 import { RxCrossCircled } from "react-icons/rx";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  console.log(isLoggedIn);
+  
   const [MobileNav, setMobileNav] = useState(false);
   const [menu, setMenu] = useState(true);
 
@@ -20,10 +24,7 @@ const Navbar = () => {
       name: "All Podcasts",
       path: "/all-podcasts",
     },
-    {
-      name: "Profile",
-      path: "/profile",
-    },
+    
   ];
   return (
     <nav className="lg:px-12 px-4 md:px-8 py-2 relative">
@@ -50,17 +51,20 @@ const Navbar = () => {
           ))}
         </div>
 
-        <div className="hidden w-2/6 lg:flex items-center justify-end">
-          <Link className="px-6 py-4 border border-black rounded-full">
+        <div className="hidden w-2/6 lg:flex items-center justify-end z-20">
+          {!isLoggedIn && <><Link to="/login" className="px-6 py-4 border border-black rounded-full cursor-pointer">
             Login
           </Link>
-          <Link className="ml-4 px-6 py-4 bg-black text-white rounded-full">
+          <Link to="/signup" className="ml-4 px-6 py-4  bg-black text-white rounded-full cursor-pointer">
             Signup
-          </Link>
+          </Link></>}
+          {isLoggedIn && <Link to="/profile" className="px-6 py-4 border border-black rounded-full cursor-pointer">
+            Profile
+            </Link>}
         </div>
-        <div className="lg:hidden flex items-center justify-end w-4/6 z-10">
+        <div className="lg:hidden flex items-center justify-end w-4/6 z-50">
           <button
-            className={` ${menu ? "text-5xl" : "hidden"}`}
+            className={` ${menu ? "text-5xl" : "hidden z-50"}`}
             onClick={() => {
               setMobileNav(!MobileNav);
               setMenu(!menu);
@@ -85,7 +89,7 @@ const Navbar = () => {
             <RxCrossCircled />
           </button>
         </div>
-        <div className="h-full -mt-10 flex flex-col items-center justify-center text-3xl ">
+        <div className="h-full -mt-10 flex flex-col items-center justify-center text-3xl">
           {navLinks.map((item, i) => (
             <Link
               key={i}

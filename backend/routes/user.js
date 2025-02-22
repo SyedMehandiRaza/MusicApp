@@ -74,7 +74,7 @@ router.post("/sign-in", async (req, res) => {
     // generate JWT token
     const token = jwt.sign(
       { id: existingUser._id, email: existingUser.email },
-      process.env.JWT_SECRET,
+      process.env.SECRET_KEY,
       { expiresIn: "30d" }
     );
 
@@ -113,16 +113,26 @@ router.get("/check-cookie", async (req, res) => {
 });
 
 // get user details
-router.get("/user-details", authMiddleware, async (req, res) => {
-  try {
-    const { email } = req.body;
-    const existingUser = await User.findOne({ email }).select("-password");
+// router.get("/user-details", authMiddleware, async (req, res) => {
+//   try {
+//     const { email } = req.body;
+//     const existingUser = await User.findOne({ email }).select("-password");
 
-    return res.status(200).json({ user: existingUser });
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: error.message });
-  }
+//     return res.status(200).json({ user: existingUser });
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(500).json({ error: error.message });
+//   }
+// });
+
+router.get("/user-details", authMiddleware, async (req, res) => {
+    try {
+        return res.status(200).json({ user: req.user });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: error.message });
+    }
 });
+
 
 module.exports = router;

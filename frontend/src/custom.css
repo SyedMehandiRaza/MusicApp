@@ -1,0 +1,34 @@
+/* custom.css */
+@layer utilities {
+    .h-\[78vh\] {
+      height: 78vh;
+    }
+  
+    .h-\[500px\] {
+      height: 500px;
+    }
+  
+    .w-\[100vw\] {
+      width: 100vw;
+    }
+  
+    .w-\[75vw\] {
+      width: 75vw;
+    }
+  
+    .m-\[100px\] {
+      margin: 100px;
+    }
+  }
+  
+  .custom-size {
+    width: 20vh;
+    height: 20vh;
+  }
+  
+  @media (min-width: 1024px) { /* lg breakpoint in Tailwind */
+    .custom-size {
+      width: 60vh;
+      height: 60vh;
+    }
+  }

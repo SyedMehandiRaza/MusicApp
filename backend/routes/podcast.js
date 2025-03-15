@@ -9,8 +9,9 @@ const router = require("express").Router();
 router.post("/add-podcast", authMiddleware, upload, async (req, res) => {
   try {
     const { title, description, category } = req.body;
-    const frontImage = req.files["frontImage"][0].path;
-    const audioFile = req.files["audioFile"][0].path;
+    const frontImage = req.files["frontImage"][0].path.replace(/\\/g, "/");;
+    const audioFile = req.files["audioFile"][0].path.replace(/\\/g, "/");;
+    // console.log("Received files:", req.files); 
     if (!title || !description || !category || !frontImage || !audioFile) {
       return res.status(400).json({ error: "All fields are mandatory" });
     }
@@ -30,7 +31,7 @@ router.post("/add-podcast", authMiddleware, upload, async (req, res) => {
       category: catid,
     });
     await newPodcast.save();
-    await Category.findByIdAndUpdateq(catid, {
+    await Category.findByIdAndUpdate(catid, {
       $push: { podcasts: newPodcast._id },
     });
     await User.findByIdAndUpdate(userid, {

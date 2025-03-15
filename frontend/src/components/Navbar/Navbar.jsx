@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  console.log(isLoggedIn);
+  // console.log(isLoggedIn);
   
   const [MobileNav, setMobileNav] = useState(false);
   const [menu, setMenu] = useState(true);
